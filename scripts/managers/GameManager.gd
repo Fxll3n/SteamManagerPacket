@@ -16,6 +16,8 @@ func scene_transition(new_scene_file: String) -> void:
 	scene_transitioned.emit(get_tree().current_scene)
 
 func start_game() -> void:
+	if is_game_started:
+		return
 	Network.send_p2p_packet(0,
 	{
 		"tag": "game_start"
