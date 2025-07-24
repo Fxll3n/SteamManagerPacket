@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbni20x3d3ate"]
 
-[ext_resource type="Script" uid="uid://cfc63pkbnp0pn" path="res://scripts/lobby_ui.gd" id="1_0fbet"]
+[ext_resource type="Script" uid="uid://cfc63pkbnp0pn" path="res://scripts/lobby_ui.gd" id="1_85uom"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_0fbet")
+script = ExtResource("1_85uom")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

@@ -4,7 +4,7 @@ signal game_started
 signal game_ended
 signal scene_transitioned(scene: Node)
 
-const PLAYER_SCENE = preload("res://addons/uState/example/player.tscn")
+const PLAYER_SCENE = preload("res://scenes/prefabs/player.tscn")
 
 func scene_transition(new_scene_file: String) -> void:
 	get_tree().change_scene_to_file(new_scene_file)
@@ -12,7 +12,7 @@ func scene_transition(new_scene_file: String) -> void:
 	scene_transitioned.emit(get_tree().current_scene)
 
 func start_game() -> void:
-	var target_scene = "res://addons/uState/example/example.tscn"
+	var target_scene = "res://scenes/levels/game.tscn"
 	await scene_transition(target_scene)
 
 	spawn_players()
@@ -26,13 +26,7 @@ func spawn_players() -> void:
 		return
 
 	for member in Network.lobby_members:
-		var is_local_player = member["steam_id"] == SteamManager.steam_id
-		var player = PLAYER_SCENE.instantiate()
-		player.id = member["steam_id"]
-		player.isLocal = is_local_player
-		if is_local_player:
-			player.name = "LocalPlayer"
-		else:
-			player.name = "RemotePlayer_%s" % member["username"]
-
-		get_tree().add_child(player)
+		var p = PLAYER_SCENE.instantiate()
+		
+		p.isLocal = member["steam_id"] == SteamManager.steam_id
+		current_scene.add_child(p)

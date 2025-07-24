@@ -1,7 +1,7 @@
 extends Node
 
 signal member_list_updated(members: Array)
-signal player_updated(player_data: Dictionary)
+signal recieved_packet(packet_data: Dictionary)
 
 const PACKET_READ_LIMIT: int = 32
 const LOBBY_MEMBER_LIMIT: int = 2
@@ -17,7 +17,7 @@ func _init() -> void:
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
 	
 func _ready() -> void:
-	chat = preload("res://chat.tscn").instantiate()
+	chat = preload("uid://bqohbpqtb4gsy").instantiate()
 	add_child(chat)
 	chat.hide()
 
@@ -87,16 +87,13 @@ func read_p2p_packet() -> void:
 		
 		if readable_data.has("tag"):
 			print("[Network] Packet contains a tag.")
+			recieved_packet.emit(readable_data)
 			match readable_data["tag"]:
 				"handshake":
 					print("[Network] Acknowledged handshake from %s (AKA %s)" % [readable_data["steam_id"], readable_data["username"]])
 					print("[Network] %s has joined the lobby." % readable_data["username"])
 					chat.print_to_chat("[b][color=green]%s[/color][/b] has joined the lobby." % readable_data["username"])
 					get_lobby_members()
-				"message":
-					chat.print_to_chat("[color=cyan][b]%s[b]:[/color]\t%s" % [readable_data["username"], readable_data["chat_message"]])
-				"player":
-					player_updated.emit(readable_data)
 
 func read_all_p2p_packets(read_count: int = 0) -> void:
 	if read_count > PACKET_READ_LIMIT:

@@ -6,6 +6,7 @@ extends CanvasLayer
 
 func _ready() -> void:
 	chat_line.text_submitted.connect(_on_message_submited)
+	Network.recieved_packet.connect(_on_packet_recieved)
 
 func send_chat_message(message: String) -> void:
 	if not message and message == null:
@@ -25,3 +26,9 @@ func _on_message_submited(new_text: String) -> void:
 	send_chat_message(new_text)
 	chat_line.text = ""
 	print_to_chat("[color=cyan][b]You[/b]:[/color]\t%s" % new_text)
+
+func _on_packet_recieved(packet_data: Dictionary) -> void:
+	if packet_data["tag"] != "message":
+		return
+	
+	print_to_chat("[color=blue][b]%s[/b]:[/color]\t%s" % [packet_data["username"], packet_data["chat_message"]])
