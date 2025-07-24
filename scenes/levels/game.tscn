@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=4 uid="uid://fxhem38jqn0n"]
+[gd_scene load_steps=4 format=4 uid="uid://fxhem38jqn0n"]
 
 [ext_resource type="Texture2D" uid="uid://0j2t6oqouc20" path="res://assets/sprites/All free tiles.png" id="1_e6yxx"]
-[ext_resource type="PackedScene" uid="uid://c18xdx3q2njmc" path="res://scenes/prefabs/player.tscn" id="2_eqihu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eqihu"]
 texture = ExtResource("1_e6yxx")
@@ -628,6 +627,4 @@ tile_map_data = PackedByteArray("AAAAAAIAAAATAAUAAAAAABIAAAAaAAUAAAAAABQAAAAaAAU
 tile_set = SubResource("TileSet_61jgc")
 
 [node name="Entities" type="Node" parent="."]
-
-[node name="Player" parent="Entities" instance=ExtResource("2_eqihu")]
-position = Vector2(213, 216)
+unique_name_in_owner = true

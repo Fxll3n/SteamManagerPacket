@@ -5,6 +5,7 @@ const SPEED: float = 3000.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var avatar_rect: TextureRect = $PlayerCard/PanelContainer/MarginContainer/Hbox/Avatar
 @onready var name_label: Label = $PlayerCard/PanelContainer/MarginContainer/Hbox/Name
+@onready var player_card: Control = $PlayerCard
 
 var direction: Vector2
 var isLocal: bool = true
@@ -14,6 +15,8 @@ func _ready() -> void:
 	Network.recieved_packet.connect(_on_packet_recieved)
 	if not isLocal:
 		setup_playercard()
+		return
+	player_card.hide()
 
 func _process(delta: float) -> void:
 	if !isLocal:
