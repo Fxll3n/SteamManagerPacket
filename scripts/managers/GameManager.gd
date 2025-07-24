@@ -6,6 +6,8 @@ signal scene_transitioned(scene: Node)
 
 const PLAYER_SCENE = preload("res://scenes/prefabs/player.tscn")
 
+var is_game_started: bool = false
+
 func _ready() -> void:
 	Network.recieved_packet.connect(_on_packet_recieved)
 
@@ -19,6 +21,7 @@ func start_game() -> void:
 		"tag": "game_start"
 	}, Steam.P2P_SEND_UNRELIABLE_NO_DELAY
 	)
+	is_game_started = true
 	print("lobby members:\n", Network.lobby_members)
 	var target_scene = "res://scenes/levels/game.tscn"
 	scene_transition(target_scene)
@@ -36,7 +39,7 @@ func spawn_players() -> void:
 		add_child(p)
 
 func _on_packet_recieved(packet_data: Dictionary) -> void:
-	if packet_data["tag"] != "game_start":
+	if packet_data["tag"] != "game_start" and not is_game_started:
 		return
 	
 	start_game()
