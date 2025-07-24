@@ -579,6 +579,3 @@ text = "F@ll3n@ng3l"
 label_settings = SubResource("LabelSettings_56dyf")
 vertical_alignment = 1
 uppercase = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)

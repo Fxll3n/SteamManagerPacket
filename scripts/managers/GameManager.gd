@@ -21,7 +21,7 @@ func start_game() -> void:
 	Network.send_p2p_packet(0,
 	{
 		"tag": "game_start"
-	}, Steam.P2P_SEND_UNRELIABLE_NO_DELAY
+	}
 	)
 	is_game_started = true
 	print("lobby members:\n", Network.lobby_members)

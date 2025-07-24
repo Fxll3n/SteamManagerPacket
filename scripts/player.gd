@@ -6,7 +6,7 @@ const SPEED: float = 3000.0
 @onready var avatar_rect: TextureRect = $PlayerCard/PanelContainer/MarginContainer/Hbox/Avatar
 @onready var name_label: Label = $PlayerCard/PanelContainer/MarginContainer/Hbox/Name
 @onready var player_card: Control = $PlayerCard
-
+@onready var cam: Camera2D = Camera2D.new()
 var direction: Vector2
 var isLocal: bool = true
 var steamID: int = 0
@@ -17,6 +17,8 @@ func _ready() -> void:
 		setup_playercard()
 		return
 	player_card.hide()
+	add_child(cam)
+	cam.zoom *= 3
 
 func _process(delta: float) -> void:
 	if !isLocal:
@@ -87,5 +89,5 @@ func update_player() -> void:
 			"tag": "player",
 			"x_pos": global_position.x,
 			"y_pos": global_position.y
-		}
+		}, Steam.P2P_SEND_UNRELIABLE_NO_DELAY
 	)
