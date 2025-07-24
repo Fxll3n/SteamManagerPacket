@@ -21,6 +21,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !isLocal:
 		return
+	update_player()
 	direction = Input.get_vector("left", "right", "up", "down").normalized()
 	animate()
 
@@ -64,6 +65,11 @@ func _on_packet_recieved(packet_data: Dictionary) -> void:
 	if packet_data["tag"] != "player":
 		return
 	
+	print(
+		"Recieved Player Packet:\n",
+		"PacketSender:\t", packet_data["username"],
+		"NEW_POS:\t(", packet_data["x_pos"], ", ", packet_data["y_pos"], ")"
+	)
 	sync_player(packet_data)
 
 
