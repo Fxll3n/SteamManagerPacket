@@ -92,7 +92,7 @@ func read_p2p_packet() -> void:
 					Chat.chat_history.append(
 						{
 							"author": "[color=red]SERVER[/color]",
-							"messsage": "%s has joined the lobby." % readable_data["username"]
+							"message": "%s has joined the lobby." % readable_data["username"]
 						}
 					)
 					Chat.update_chat()
