@@ -73,22 +73,16 @@ func _on_packet_recieved(packet_data: Dictionary) -> void:
 func sync_player(data: Dictionary) -> void:
 	if isLocal or data["steam_id"] != steamID:
 		return
-	
-	velocity.x = data["x_pos"]
-	velocity.y = data["y_pos"]
-	
-	#global_position.x = data["x_pos"]
-	#global_position.y = data["y_pos"]
+		
+	global_position.x = data["x_pos"]
+	global_position.y = data["y_pos"]
 	
 
 func update_player() -> void:
-	Network.send_p2p_packet(0,
+	Network.send_p2p_packet(
 		{
 			"tag": "player",
-			"velocity_x": velocity.x,
-			"velocity_y": velocity.y
-			
-			#"x_pos": global_position.x,
-			#"y_pos": global_position.y
+			"x_pos": global_position.x,
+			"y_pos": global_position.y
 		}, Steam.P2P_SEND_UNRELIABLE_NO_DELAY
 	)

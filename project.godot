@@ -21,6 +21,7 @@ Network="*res://scripts/managers/NetworkManager.gd"
 SteamManager="*res://scripts/managers/SteamManager.gd"
 GameManager="*res://scripts/managers/GameManager.gd"
 LimboConsole="*res://addons/limbo_console/limbo_console.gd"
+Chat="*res://scripts/chat.gd"
 
 [editor_plugins]
 

@@ -9,7 +9,6 @@ const LOBBY_MEMBER_LIMIT: int = 2
 var is_host: bool = false
 var lobby_id: int = 0
 var lobby_members: Array = []
-var chat: Chat
 
 func _init() -> void:
 	Steam.lobby_created.connect(_on_lobby_created)
@@ -17,9 +16,7 @@ func _init() -> void:
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
 	
 func _ready() -> void:
-	chat = preload("uid://bqohbpqtb4gsy").instantiate()
-	add_child(chat)
-	chat.hide()
+	Chat.hide()
 
 func _process(delta: float) -> void:
 	if not Steam.isSteamRunning():
@@ -35,11 +32,11 @@ func create_lobby() -> void:
 		return
 	is_host = true
 	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, LOBBY_MEMBER_LIMIT)
-	chat.show()
+	Chat.show()
 
 func join_lobby(this_lobby_id: int) -> void:
 	Steam.joinLobby(this_lobby_id)
-	chat.show()
+	Chat.show()
 
 func get_lobby_members() -> Array:
 	lobby_members.clear()
@@ -56,7 +53,7 @@ func get_lobby_members() -> Array:
 	emit_signal("member_list_updated", lobby_members)
 	return lobby_members
 
-func send_p2p_packet(this_target: int, packet_data: Dictionary, send_type: int = 0) -> void:
+func send_p2p_packet(packet_data: Dictionary, this_target: int = 0, send_type: int = 0) -> void:
 	var channel = 0
 	
 	var this_data: PackedByteArray
@@ -92,7 +89,7 @@ func read_p2p_packet() -> void:
 				"handshake":
 					print("[Network] Acknowledged handshake from %s (AKA %s)" % [readable_data["steam_id"], readable_data["username"]])
 					print("[Network] %s has joined the lobby." % readable_data["username"])
-					chat.print_to_chat("[b][color=green]%s[/color][/b] has joined the lobby." % readable_data["username"])
+					Chat.send_message(str("%s has joined the lobby." % readable_data["username"]), "[color=red]SERVER[/color]")
 					get_lobby_members()
 
 func read_all_p2p_packets(read_count: int = 0) -> void:
@@ -104,7 +101,7 @@ func read_all_p2p_packets(read_count: int = 0) -> void:
 		read_all_p2p_packets(read_count + 1)
 
 func make_p2p_handshake() -> void:
-	send_p2p_packet(0, {
+	send_p2p_packet({
 		"tag" : "handshake"
 	})
 	print("[Network] Initiated Handshake.")

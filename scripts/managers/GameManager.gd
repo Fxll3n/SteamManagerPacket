@@ -18,7 +18,7 @@ func scene_transition(new_scene_file: String) -> void:
 func start_game() -> void:
 	if is_game_started:
 		return
-	Network.send_p2p_packet(0,
+	Network.send_p2p_packet(
 	{
 		"tag": "game_start"
 	}

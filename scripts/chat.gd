@@ -1,34 +1,60 @@
-class_name Chat
 extends CanvasLayer
 
-@onready var chat_history: RichTextLabel = %ChatHistory
-@onready var chat_line: LineEdit = %ChatLine
+const CHAT_SCENE: PackedScene = preload("uid://ciawip7fyqq47")
+
+@onready var chat_rtl: RichTextLabel
+@onready var chat_line: LineEdit
+
+var chat_history: Array[Dictionary] = []
+var chat_view: Control
 
 func _ready() -> void:
+	chat_view = CHAT_SCENE.instantiate()
+	add_child(chat_view)
+	
+	chat_rtl = chat_view.get_node("%ChatHistory")
+	chat_line = chat_view.get_node("%ChatLine")
+	
 	chat_line.text_submitted.connect(_on_message_submited)
 	Network.recieved_packet.connect(_on_packet_recieved)
 
-func send_chat_message(message: String) -> void:
+func send_message(message: String, author: String = Steam.getPersonaName()) -> void:
 	if not message and message == null:
 		return
 	
-	Network.send_p2p_packet(0,
+	Network.send_p2p_packet(
 		{
 			"tag": "message",
-			"chat_message": message
+			"author": author,
+			"message": message
 		}
 	)
+	chat_history.append(
+		{
+			"author": author,
+			"message": message
+		}
+	)
+	update_chat()
 
-func print_to_chat(message: String) -> void:
-	chat_history.append_text(message + "\n")
+func update_chat() -> void:
+	chat_rtl.text = ""
+	for msg in chat_history:
+		chat_rtl.append_text("[color=cyan][b]%s:[/b][/color] %s" % [msg["author"], msg["message"]])
 
 func _on_message_submited(new_text: String) -> void:
-	send_chat_message(new_text)
+	send_message(new_text)
 	chat_line.text = ""
-	print_to_chat("[color=cyan][b]You[/b]:[/color]\t%s" % new_text)
 
 func _on_packet_recieved(packet_data: Dictionary) -> void:
 	if packet_data["tag"] != "message":
 		return
 	
-	print_to_chat("[color=blue][b]%s[/b]:[/color]\t%s" % [packet_data["username"], packet_data["chat_message"]])
+	send_message(packet_data["message"], packet_data["author"])
+
+func setup_console_commands() -> void:
+	LimboConsole.register_command(
+		send_message,
+		"msg",
+		"send a message in chat."
+	)
