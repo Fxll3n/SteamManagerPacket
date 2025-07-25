@@ -23,6 +23,7 @@ func send_message(message: String, author: String = Steam.getPersonaName()) -> v
 		return
 	
 	Network.send_p2p_packet(
+		Network.ALL_TARGETS,
 		{
 			"tag": "message",
 			"author": author,
@@ -50,7 +51,12 @@ func _on_packet_recieved(packet_data: Dictionary) -> void:
 	if packet_data["tag"] != "message" or packet_data["steam_id"] == SteamManager.steam_id:
 		return
 	
-	send_message(packet_data["message"], packet_data["author"])
+	chat_history.append(
+		{
+			"author": packet_data["author"],
+			"message": packet_data["message"]
+		}
+	)
 
 func setup_console_commands() -> void:
 	LimboConsole.register_command(

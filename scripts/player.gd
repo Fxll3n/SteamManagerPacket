@@ -67,6 +67,8 @@ func _on_packet_recieved(packet_data: Dictionary) -> void:
 	if packet_data["tag"] != "player":
 		return
 	
+	print(packet_data)
+	
 	sync_player(packet_data)
 
 
@@ -80,9 +82,11 @@ func sync_player(data: Dictionary) -> void:
 
 func update_player() -> void:
 	Network.send_p2p_packet(
+		Network.ALL_TARGETS,
 		{
 			"tag": "player",
 			"x_pos": global_position.x,
 			"y_pos": global_position.y
-		}, Steam.P2P_SEND_UNRELIABLE_NO_DELAY
+		},
+		Steam.P2P_SEND_UNRELIABLE_NO_DELAY
 	)

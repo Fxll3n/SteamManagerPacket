@@ -19,9 +19,10 @@ func start_game() -> void:
 	if is_game_started:
 		return
 	Network.send_p2p_packet(
-	{
+		Network.ALL_TARGETS,
+		{
 		"tag": "game_start"
-	}
+		}
 	)
 	is_game_started = true
 	print("lobby members:\n", Network.lobby_members)

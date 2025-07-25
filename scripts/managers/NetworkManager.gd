@@ -3,6 +3,10 @@ extends Node
 signal member_list_updated(members: Array)
 signal recieved_packet(packet_data: Dictionary)
 
+enum {
+	ALL_TARGETS = 0
+}
+
 const PACKET_READ_LIMIT: int = 32
 const LOBBY_MEMBER_LIMIT: int = 2
 
@@ -53,7 +57,7 @@ func get_lobby_members() -> Array:
 	emit_signal("member_list_updated", lobby_members)
 	return lobby_members
 
-func send_p2p_packet(packet_data: Dictionary, this_target: int = 0, send_type: int = 0) -> void:
+func send_p2p_packet(this_target: int, packet_data: Dictionary, send_type: int = 0) -> void:
 	var channel = 0
 	
 	var this_data: PackedByteArray
@@ -107,9 +111,12 @@ func read_all_p2p_packets(read_count: int = 0) -> void:
 		read_all_p2p_packets(read_count + 1)
 
 func make_p2p_handshake() -> void:
-	send_p2p_packet({
+	send_p2p_packet(
+		0,
+		{
 		"tag" : "handshake"
-	})
+		}
+	)
 	print("[Network] Initiated Handshake.")
 #endregion
 #region SIGNALS
