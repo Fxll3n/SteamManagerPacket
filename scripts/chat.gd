@@ -48,7 +48,7 @@ func _on_message_submited(new_text: String) -> void:
 	chat_line.text = ""
 
 func _on_packet_recieved(packet_data: Dictionary) -> void:
-	if packet_data["tag"] != "message" or packet_data["steam_id"] == SteamManager.steam_id:
+	if packet_data["tag"] != "message":
 		return
 	
 	chat_history.append(
@@ -57,6 +57,7 @@ func _on_packet_recieved(packet_data: Dictionary) -> void:
 			"message": packet_data["message"]
 		}
 	)
+	update_chat()
 
 func setup_console_commands() -> void:
 	LimboConsole.register_command(

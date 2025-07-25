@@ -67,8 +67,6 @@ func _on_packet_recieved(packet_data: Dictionary) -> void:
 	if packet_data["tag"] != "player":
 		return
 	
-	print(packet_data)
-	
 	sync_player(packet_data)
 
 
