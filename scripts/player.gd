@@ -78,6 +78,7 @@ func sync_player(data: Dictionary) -> void:
 		
 	global_position.x = data["x_pos"]
 	global_position.y = data["y_pos"]
+	sprite.animation = data["current_anim"]
 	
 
 func update_player() -> void:
@@ -86,7 +87,8 @@ func update_player() -> void:
 		{
 			"tag": "player",
 			"x_pos": global_position.x,
-			"y_pos": global_position.y
+			"y_pos": global_position.y,
+			"current_anim": sprite.animation
 		},
 		Steam.P2P_SEND_UNRELIABLE_NO_DELAY
 	)
