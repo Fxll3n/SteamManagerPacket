@@ -1,6 +1,6 @@
 [gd_scene load_steps=75 format=3 uid="uid://c18xdx3q2njmc"]
 
-[ext_resource type="Script" uid="uid://d2r54lnvn85yk" path="res://scripts/player.gd" id="1_06qtw"]
+[ext_resource type="Script" uid="uid://d2r54lnvn85yk" path="res://scripts/player.gd" id="1_6o77n"]
 [ext_resource type="Texture2D" uid="uid://bhwhm5hsshchh" path="res://assets/sprites/Blue Knight idle Sprite-sheet 16x16.png" id="2_tou0u"]
 [ext_resource type="Texture2D" uid="uid://y3w4fsme8g5w" path="res://assets/sprites/Blue Knight run Sprite-sheet 16x17.png" id="3_n0leu"]
 [ext_resource type="FontFile" uid="uid://bfp8v3plv8oi0" path="res://addons/uState/example/assets/fonts/PixelOperator8.ttf" id="4_8cdkg"]
@@ -520,7 +520,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
-script = ExtResource("1_06qtw")
+script = ExtResource("1_6o77n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1a8bf")
