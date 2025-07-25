@@ -78,7 +78,7 @@ func sync_player(data: Dictionary) -> void:
 		
 	global_position.x = data["x_pos"]
 	global_position.y = data["y_pos"]
-	sprite.animation = data["current_anim"]
+	sprite.play(data["current_anim"])
 	
 
 func update_player() -> void:
