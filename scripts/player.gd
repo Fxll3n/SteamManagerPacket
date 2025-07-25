@@ -74,8 +74,8 @@ func sync_player(data: Dictionary) -> void:
 	if isLocal or data["steam_id"] != steamID:
 		return
 	
-	velocity.x = data["x_pos"]
-	velocity.y = data["y_pos"]
+	velocity.x = data["velocity_x"]
+	velocity.y = data["velocity_y"]
 	
 	#global_position.x = data["x_pos"]
 	#global_position.y = data["y_pos"]
