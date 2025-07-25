@@ -40,14 +40,14 @@ func send_message(message: String, author: String = Steam.getPersonaName()) -> v
 func update_chat() -> void:
 	chat_rtl.text = ""
 	for msg in chat_history:
-		chat_rtl.append_text("[color=cyan][b]%s:[/b][/color] %s" % [msg["author"], msg["message"]])
+		chat_rtl.append_text("[color=cyan][b]%s:[/b][/color] %s\n" % [msg["author"], msg["message"]])
 
 func _on_message_submited(new_text: String) -> void:
 	send_message(new_text)
 	chat_line.text = ""
 
 func _on_packet_recieved(packet_data: Dictionary) -> void:
-	if packet_data["tag"] != "message":
+	if packet_data["tag"] != "message" or packet_data["steam_id"] == SteamManager.steam_id:
 		return
 	
 	send_message(packet_data["message"], packet_data["author"])

@@ -89,7 +89,13 @@ func read_p2p_packet() -> void:
 				"handshake":
 					print("[Network] Acknowledged handshake from %s (AKA %s)" % [readable_data["steam_id"], readable_data["username"]])
 					print("[Network] %s has joined the lobby." % readable_data["username"])
-					Chat.send_message(str("%s has joined the lobby." % readable_data["username"]), "[color=red]SERVER[/color]")
+					Chat.chat_history.append(
+						{
+							"author": "[color=red]SERVER[/color]",
+							"messsage": "%s has joined the lobby." % readable_data["username"]
+						}
+					)
+					Chat.update_chat()
 					get_lobby_members()
 
 func read_all_p2p_packets(read_count: int = 0) -> void:
