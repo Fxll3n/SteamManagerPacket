@@ -120,9 +120,9 @@ func make_p2p_handshake() -> void:
 	print("[Network] Initiated Handshake.")
 #endregion
 #region SIGNALS
-func _on_lobby_created(connect: int, this_lobby_id: int) -> void:
-	if connect != 1:
-		push_warning("[Network] Lobby creation failed with error code:\t%s" % connect)
+func _on_lobby_created(connection: int, this_lobby_id: int) -> void:
+	if connection != 1:
+		push_warning("[Network] Lobby creation failed with error code:\t%s" % connection)
 		return
 	
 	lobby_id = this_lobby_id

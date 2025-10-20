@@ -2,7 +2,7 @@ extends Control
 
 @onready var lobby_id_field: LineEdit = %LobbyIDField
 @onready var lobby_list: ItemList = %LobbyLists
-@onready var lobby: HSplitContainer = $PanelContainer/MarginContainer/Lobby
+@onready var lobby_ui: HSplitContainer = $PanelContainer/MarginContainer/Lobby
 @onready var lobby_discovery: HSplitContainer = $PanelContainer/MarginContainer/LobbyDiscovery
 @onready var members_vbox: VBoxContainer = $PanelContainer/MarginContainer/Lobby/Members
 @onready var start: Button = $PanelContainer/MarginContainer/Lobby/Control/Start
@@ -11,7 +11,7 @@ extends Control
 var lobby_ids: Array = []
 
 func _ready() -> void:
-	lobby.hide()
+	lobby_ui.hide()
 	lobby_discovery.show()
 	lobby_list.item_activated.connect(_on_lobby_item_activated)
 	Network.connect("member_list_updated", _on_member_list_updated)
@@ -53,7 +53,7 @@ func _on_lobby_item_activated(index: int) -> void:
 
 func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
-		lobby.show()
+		lobby_ui.show()
 		lobby_discovery.hide()
 		
 		if Network.is_host:
@@ -63,7 +63,7 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 		Network.get_lobby_members() # Will trigger member_list_updated signal
 
 func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int, chat_state: int) -> void:
-	if lobby.visible:
+	if lobby_ui.visible:
 		Network.get_lobby_members() # Will trigger member_list_updated signal
 
 func _on_member_list_updated(members: Array) -> void:
@@ -100,7 +100,7 @@ func create_member_card(member: Dictionary) -> void:
 # Optional: A leave lobby function
 func _on_leave_lobby_pressed() -> void:
 	Steam.leaveLobby(Network.lobby_id)
-	lobby.hide()
+	lobby_ui.hide()
 	lobby_discovery.show()
 	update_lobby_list()
 
