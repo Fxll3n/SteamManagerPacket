@@ -8,20 +8,24 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="SteamManagerTest-Packet"
 run/main_scene="uid://dbni20x3d3ate"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Network="*res://scripts/managers/NetworkManager.gd"
-SteamManager="*res://scripts/managers/SteamManager.gd"
-GameManager="*res://scripts/managers/GameManager.gd"
-Chat="*res://scripts/chat.gd"
-LimboConsole="*res://addons/limbo_console/limbo_console.gd"
+GameManager="*res://addons/fsi/demo/scripts/managers/GameManager.gd"
+Chat="*res://addons/fsi/demo/scripts/chat.gd"
+LimboConsole="*uid://dyxornv8vwibg"
+NetworkManager="*uid://ckpugobkc8lf2"
+SteamManager="*uid://bt35tlofgqw1x"
 
 [debug]
 
@@ -33,7 +37,7 @@ gdscript/warnings/unused_signal=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/limbo_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/fsi/plugin.cfg", "res://addons/limbo_console/plugin.cfg")
 
 [input]
 
@@ -90,3 +94,4 @@ textures/vram_compression/import_etc2_astc=true
 initialization/app_id=0
 initialization/initialize_on_startup=false
 initialization/embed_callbacks=false
+multiplayer_peer/max_channels=4

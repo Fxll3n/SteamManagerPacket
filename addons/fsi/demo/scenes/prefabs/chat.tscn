@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://33pvnhlhsbiw"]
+
+[ext_resource type="Script" uid="uid://ncdymwu1xtjp" path="res://addons/fsi/demo/scripts/chat.gd" id="1_dg5i7"]
+[ext_resource type="PackedScene" uid="uid://ciawip7fyqq47" path="res://addons/fsi/demo/scenes/prefabs/chat_view.tscn" id="2_reduw"]
+
+[node name="Chat" type="CanvasLayer"]
+script = ExtResource("1_dg5i7")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" parent="." instance=ExtResource("2_reduw")]
