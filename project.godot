@@ -8,10 +8,6 @@
 
 config_version=5
 
-[animation]
-
-compatibility/default_parent_skeleton_in_mesh_instance_3d=true
-
 [application]
 
 config/name="SteamManagerTest-Packet"
@@ -23,7 +19,6 @@ config/icon="res://icon.svg"
 
 GameManager="*res://addons/fsi/demo/scripts/managers/GameManager.gd"
 Chat="*res://addons/fsi/demo/scripts/chat.gd"
-LimboConsole="*uid://dyxornv8vwibg"
 NetworkManager="*uid://ckpugobkc8lf2"
 SteamManager="*uid://bt35tlofgqw1x"
 
@@ -37,7 +32,7 @@ gdscript/warnings/unused_signal=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fsi/plugin.cfg", "res://addons/limbo_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/fsi/plugin.cfg")
 
 [input]
 

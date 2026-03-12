@@ -58,10 +58,3 @@ func _on_packet_recieved(packet_data: Dictionary) -> void:
 		}
 	)
 	update_chat()
-
-func setup_console_commands() -> void:
-	LimboConsole.register_command(
-		send_message,
-		"msg",
-		"send a message in chat."
-	)

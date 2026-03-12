@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://ncdymwu1xtjp" path="res://addons/fsi/demo/scripts/chat.gd" id="1_dg5i7"]
 [ext_resource type="PackedScene" uid="uid://ciawip7fyqq47" path="res://addons/fsi/demo/scenes/prefabs/chat_view.tscn" id="2_reduw"]
 
-[node name="Chat" type="CanvasLayer"]
+[node name="Chat" type="CanvasLayer" unique_id=1480117834]
 script = ExtResource("1_dg5i7")
 metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" parent="." instance=ExtResource("2_reduw")]
+[node name="PanelContainer" parent="." unique_id=915330183 instance=ExtResource("2_reduw")]

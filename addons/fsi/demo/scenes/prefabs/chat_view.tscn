@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ciawip7fyqq47"]
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" unique_id=1002818073]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -8,17 +8,17 @@ offset_top = -259.0
 offset_right = 585.0
 grow_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1294167840]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2024549434]
 layout_mode = 2
 
-[node name="ChatHistory" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="ChatHistory" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=502035480]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
@@ -27,7 +27,7 @@ bbcode_enabled = true
 scroll_following = true
 vertical_alignment = 2
 
-[node name="VScrollBar" type="VScrollBar" parent="MarginContainer/VBoxContainer/ChatHistory"]
+[node name="VScrollBar" type="VScrollBar" parent="MarginContainer/VBoxContainer/ChatHistory" unique_id=1960039904]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -36,7 +36,7 @@ offset_left = -8.0
 offset_bottom = 8.0
 grow_horizontal = 0
 
-[node name="ChatLine" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+[node name="ChatLine" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=1834662148]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Enter Message Here..."
